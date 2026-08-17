@@ -1,36 +1,28 @@
 # Matte3D
 
-A small native Android 3D editor prototype inspired by the mobile workflow of Prisma3D.
+Editor 3D Android nativo em Java + OpenGL ES 3.0, inspirado no fluxo de editores mobile como Prisma3D.
 
-## Current features
+## v0.2
 
-- Native Java Android app (no WebView)
-- OpenGL ES 3.0 viewport
-- Forced landscape orientation
-- Immersive fullscreen mode
-- Matte gray editor interface
-- Scene hierarchy
-- Add Cube and Plane primitives
-- Select, duplicate and delete objects
-- Position / rotation / scale inspector with live sliders
-- Orbit camera by dragging
-- Pinch to zoom
-- Reset camera view
-- Local scene persistence with SharedPreferences + JSON
-- GitHub Actions APK build
+- UI redesenhada em cinza fosco, landscape e fullscreen
+- viewport OpenGL ES 3.0
+- Cube, Plane, Sphere e Cylinder
+- seleção por toque diretamente no viewport
+- duplo toque para focar o objeto selecionado
+- modos NAV, MOVE, ROTATE e SCALE por gesto
+- gizmo XYZ visual no objeto selecionado
+- snap de movimento (0.25), rotação (15 graus) e escala
+- hierarquia com visibilidade e bloqueio por objeto
+- inspector com edição numérica precisa de Position / Rotation / Scale
+- rename de objetos
+- Undo / Redo com histórico de até 40 estados
+- Duplicate / Delete / Reset Transform
+- vistas Perspective, Front, Right e Top
+- câmera orbital e pinch-to-zoom
+- salvamento local da cena
 
 ## Build
 
-The repository includes a GitHub Actions workflow that builds `app-debug.apk` on pushes to `main`.
+O workflow em `.github/workflows/android.yml` gera um APK debug a cada push para `main`.
 
-Locally, with Android SDK 35 and Gradle 8.10.2 installed:
-
-```bash
-gradle :app:assembleDebug
-```
-
-APK output:
-
-```text
-app/build/outputs/apk/debug/app-debug.apk
-```
+Requisitos locais: JDK 17, Android SDK 35 e Gradle compatível com o projeto.

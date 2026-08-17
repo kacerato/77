@@ -4,11 +4,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public final class SceneObject {
-    public enum Type { CUBE, PLANE }
+    public enum Type { CUBE, PLANE, SPHERE, CYLINDER }
 
     public final long id;
     public String name;
     public final Type type;
+    public volatile boolean visible = true;
+    public volatile boolean locked = false;
 
     public volatile float px;
     public volatile float py;
@@ -28,6 +30,8 @@ public final class SceneObject {
 
     public SceneObject copy(long newId, String newName) {
         SceneObject out = new SceneObject(newId, newName, type);
+        out.visible = visible;
+        out.locked = false;
         out.px = px + 0.5f;
         out.py = py;
         out.pz = pz + 0.5f;
@@ -45,6 +49,8 @@ public final class SceneObject {
         json.put("id", id);
         json.put("name", name);
         json.put("type", type.name());
+        json.put("visible", visible);
+        json.put("locked", locked);
         json.put("px", px);
         json.put("py", py);
         json.put("pz", pz);
@@ -63,6 +69,8 @@ public final class SceneObject {
                 json.getString("name"),
                 Type.valueOf(json.getString("type"))
         );
+        out.visible = json.optBoolean("visible", true);
+        out.locked = json.optBoolean("locked", false);
         out.px = (float) json.optDouble("px", 0.0);
         out.py = (float) json.optDouble("py", 0.0);
         out.pz = (float) json.optDouble("pz", 0.0);
